@@ -2,6 +2,8 @@
 
 Microplate layout designer (`6` to `384` wells), master-mix and serial-dilution calculator, and plate-reader / qPCR parser.
 
+**Live web app:** https://plate-tidy.vercel.app
+
 `plate-tidy` pairs a static browser interface (`web/`) with a zero-dependency Python CLI (`src/plate_tidy/`). Both read and write the same `.plate.json` layout format and parse raw `.xlsx`, `.csv`, `.tsv`, and `.txt` exports from BioTek Gen5, Tecan Spark/Magellan, Molecular Devices SoftMax Pro, BMG Labtech, and Applied Biosystems QuantStudio.
 
 ## Features
