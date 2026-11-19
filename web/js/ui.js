@@ -209,15 +209,34 @@
   function renderSerialSeriesEditor() {
     const container = document.getElementById("sd-series-list");
     const rows = PT.state.serialSeries;
-    const disableDel = rows.length <= 1 ? "disabled" : "";
+    const isMulti = rows.length > 1;
     container.innerHTML = rows
       .map(
         (s, idx) => `
-        <div class="sd-series-row" data-idx="${idx}">
-          <input type="text" class="sds-sample" value="${PT.esc(s.sample)}" placeholder="Cell line(s)" title="Comma-separate for multiple (e.g. WT, KO)"/>
-          <input type="text" class="sds-treat" value="${PT.esc(s.treatment)}" placeholder="Compound(s)" title="Comma-separate for multiple"/>
-          <input type="number" class="sds-top" value="${s.top}" step="any" min="0" title="Top dose"/>
-          <button type="button" class="subtle sd-del" ${disableDel} title="Remove row">×</button>
+        <div class="sd-series-card${isMulti ? " multi" : ""}" data-idx="${idx}">
+          ${
+            isMulti
+              ? `<div class="sd-card-head"><span>Series ${idx + 1}</span><button type="button" class="subtle sd-del">Remove</button></div>`
+              : ""
+          }
+          <div class="field">
+            <label>Sample / Cell line <span style="font-weight:400;color:var(--ink-muted);">(comma-separate for multiple)</span></label>
+            <input type="text" class="sds-sample" value="${PT.esc(s.sample)}" placeholder="e.g. BRCA1-WT or WT, KO"/>
+          </div>
+          <div class="field">
+            <label>Compound / Treatment</label>
+            <input type="text" class="sds-treat" value="${PT.esc(s.treatment)}" placeholder="e.g. Olaparib"/>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>Starting concentration</label>
+              <input type="number" class="sds-top" value="${s.top}" step="any" min="0" placeholder="e.g. 10"/>
+            </div>
+            <div class="field">
+              <label>Unit</label>
+              <input type="text" class="sds-unit" list="unit-presets" value="${PT.esc(s.unit || "µM")}" placeholder="µM, nM, %"/>
+            </div>
+          </div>
         </div>`
       )
       .join("");
@@ -232,8 +251,9 @@
       const sList = samples.length ? samples : [""];
       const tList = treats.length ? treats : ["Compound"];
       const top = parseFloat(row.top) > 0 ? parseFloat(row.top) : 10;
+      const unit = String(row.unit || "").trim() || "µM";
       sList.forEach((smp) => {
-        tList.forEach((trt) => out.push({ sample: smp, treatment: trt, top }));
+        tList.forEach((trt) => out.push({ sample: smp, treatment: trt, top, unit }));
       });
     });
     return out;
@@ -245,7 +265,7 @@
     const dir = document.getElementById("sd-dir").value;
     const repsRaw = document.getElementById("sd-reps").value;
     const factor = Math.max(1.05, parseFloat(document.getElementById("sd-factor").value) || 3);
-    const unit = document.getElementById("sd-unit").value.trim() || "µM";
+    const bioRep = document.getElementById("sd-biorep").value.trim() || "Rep 1";
     const zeroLast = document.getElementById("sd-zero-last").checked;
 
     document.getElementById("lbl-sd-reps").textContent = dir === "cols" ? "Rows per series" : "Cols per series";
@@ -305,7 +325,7 @@
       blocks.push({ series: s, lStart, lEnd, lowDose, rangeLbl });
     });
 
-    return { dir, rMin, rMax, cMin, cMax, nSteps, factor, unit, zeroLast, usedDefaultBox, overflowed, blocks };
+    return { dir, rMin, rMax, cMin, cMax, nSteps, factor, bioRep, zeroLast, usedDefaultBox, overflowed, blocks };
   }
 
   function updateSerialPreview() {
@@ -322,7 +342,7 @@
     const lines = plan.blocks.map((b) => {
       const sName = b.series.sample ? `${PT.esc(b.series.sample)} · ${PT.esc(b.series.treatment)}` : PT.esc(b.series.treatment);
       const vehSuf = plan.zeroLast && plan.nSteps >= 2 ? " + Veh" : "";
-      return `<div><code>${b.rangeLbl}</code>: ${sName} (${PT.fmtNum(b.series.top, 3)} → ${b.lowDose} ${PT.esc(plan.unit)}${vehSuf})</div>`;
+      return `<div><code>${b.rangeLbl}</code>: ${sName} (${PT.fmtNum(b.series.top, 3)} → ${b.lowDose} ${PT.esc(b.series.unit)}${vehSuf})</div>`;
     });
     if (plan.overflowed) {
       lines.push(`<div style="color:var(--danger-ink);margin-top:3px;">Exceeds plate edge — reduce series count or replicates per series.</div>`);
@@ -538,8 +558,8 @@
     });
 
     PT.state.serialSeries = [
-      { sample: "BRCA1-WT", treatment: "Olaparib", top: 10 },
-      { sample: "BRCA1-KO", treatment: "Olaparib", top: 10 },
+      { sample: "BRCA1-WT", treatment: "Olaparib", top: 10, unit: "µM" },
+      { sample: "BRCA1-KO", treatment: "Olaparib", top: 10, unit: "µM" },
     ];
     PT.state.readBlocks = [{ block_id: "CellTiter-Glo Luminescence (RLU)", measurements }];
     PT.state.activeBlockIdx = 0;
@@ -739,16 +759,17 @@
     });
 
     document.getElementById("btn-add-sd-series").addEventListener("click", () => {
-      const last = PT.state.serialSeries[PT.state.serialSeries.length - 1] || { sample: "", treatment: "", top: 10 };
-      PT.state.serialSeries.push({ sample: last.sample, treatment: "", top: last.top });
+      const last = PT.state.serialSeries[PT.state.serialSeries.length - 1] || { sample: "", treatment: "", top: 10, unit: "µM" };
+      PT.state.serialSeries.push({ sample: last.sample, treatment: "", top: last.top, unit: last.unit || "µM" });
       renderSerialSeriesEditor();
     });
 
     document.getElementById("sd-series-list").addEventListener("input", () => {
-      PT.state.serialSeries = [...document.querySelectorAll("#sd-series-list .sd-series-row")].map((el) => ({
+      PT.state.serialSeries = [...document.querySelectorAll("#sd-series-list .sd-series-card")].map((el) => ({
         sample: el.querySelector(".sds-sample").value,
         treatment: el.querySelector(".sds-treat").value,
         top: el.querySelector(".sds-top").value,
+        unit: el.querySelector(".sds-unit").value,
       }));
       updateSerialPreview();
     });
@@ -756,11 +777,11 @@
     document.getElementById("sd-series-list").addEventListener("click", (e) => {
       const del = e.target.closest(".sd-del");
       if (!del || PT.state.serialSeries.length <= 1) return;
-      PT.state.serialSeries.splice(parseInt(del.closest(".sd-series-row").dataset.idx, 10), 1);
+      PT.state.serialSeries.splice(parseInt(del.closest(".sd-series-card").dataset.idx, 10), 1);
       renderSerialSeriesEditor();
     });
 
-    ["sd-unit", "sd-factor", "sd-dir", "sd-reps", "sd-zero-last"].forEach((id) => {
+    ["sd-factor", "sd-dir", "sd-reps", "sd-biorep", "sd-zero-last"].forEach((id) => {
       document.getElementById(id).addEventListener("input", updateSerialPreview);
       document.getElementById(id).addEventListener("change", updateSerialPreview);
     });
@@ -782,10 +803,10 @@
             const c = plan.dir === "cols" ? pos : lane;
             const wid = `${PT.rowIdxToLabel(r)}${c + 1}`;
             if (plan.zeroLast && stepIdx === plan.nSteps - 1 && plan.nSteps >= 2) {
-              PT.state.wells[wid] = { well: wid, role: "neg_ctrl", sample: b.series.sample, treatment: "Vehicle", concentration: 0, unit: plan.unit, bio_rep: "Rep 1" };
+              PT.state.wells[wid] = { well: wid, role: "neg_ctrl", sample: b.series.sample, treatment: "Vehicle", concentration: 0, unit: b.series.unit, bio_rep: plan.bioRep };
             } else {
               const dose = Number((b.series.top / Math.pow(plan.factor, stepIdx)).toPrecision(4));
-              PT.state.wells[wid] = { well: wid, role: "sample", sample: b.series.sample, treatment: b.series.treatment, concentration: dose, unit: plan.unit, bio_rep: "Rep 1" };
+              PT.state.wells[wid] = { well: wid, role: "sample", sample: b.series.sample, treatment: b.series.treatment, concentration: dose, unit: b.series.unit, bio_rep: plan.bioRep };
             }
           }
         }

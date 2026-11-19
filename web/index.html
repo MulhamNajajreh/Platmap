@@ -137,7 +137,7 @@
               </div>
               <div class="field">
                 <label for="assign-unit">Unit</label>
-                <input type="text" id="assign-unit" value="µM" placeholder="µM, nM, %"/>
+                <input type="text" id="assign-unit" list="unit-presets" value="µM" placeholder="µM, nM, %"/>
               </div>
             </div>
 
@@ -149,58 +149,65 @@
             <button type="button" class="primary" id="btn-apply-wells" style="margin-top:4px;">Apply to Selection</button>
           </div>
 
+          <datalist id="unit-presets">
+            <option value="µM"></option>
+            <option value="nM"></option>
+            <option value="mM"></option>
+            <option value="pM"></option>
+            <option value="µg/mL"></option>
+            <option value="ng/mL"></option>
+            <option value="mg/mL"></option>
+            <option value="%"></option>
+            <option value="MOI"></option>
+          </datalist>
+
           <!-- Serial Dilution Mode -->
           <div id="pane-mode-serial" class="form-stack" style="display:none;">
-            <div>
-              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;">
-                <label style="font-size:12px;font-weight:600;color:var(--ink-secondary);">Series (cell line · compound · top dose)</label>
-                <button type="button" class="subtle" id="btn-add-sd-series" style="padding:2px 8px;font-size:11.5px;">+ Add Series</button>
+            <div id="sd-series-list" class="sd-series-list"></div>
+
+            <button type="button" class="subtle" id="btn-add-sd-series" style="width:100%;text-align:center;">+ Add Another Compound / Cell Line</button>
+
+            <div style="border-top:1px solid var(--border);padding-top:10px;margin-top:2px;" class="form-stack">
+              <div class="field-row">
+                <div class="field">
+                  <label for="sd-factor">Dilution factor (1 : X)</label>
+                  <input type="number" id="sd-factor" value="3" min="1.05" step="any" placeholder="e.g. 3 for 1:3"/>
+                </div>
+                <div class="field">
+                  <label for="sd-dir">Direction</label>
+                  <select id="sd-dir">
+                    <option value="cols" selected>Across columns →</option>
+                    <option value="rows">Down rows ↓</option>
+                  </select>
+                </div>
               </div>
-              <div style="font-size:11.5px;color:var(--ink-muted);margin-bottom:7px;">
-                Add rows for distinct compounds/top doses, or separate names with commas (e.g. <code>WT, KO</code>).
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="sd-reps" id="lbl-sd-reps">Rows per series</label>
+                  <select id="sd-reps">
+                    <option value="auto" selected>Auto-fit selection</option>
+                    <option value="1">1 (single)</option>
+                    <option value="2">2 (duplicate)</option>
+                    <option value="3">3 (triplicate)</option>
+                    <option value="4">4 (quadruplicate)</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="sd-biorep">Biological replicate</label>
+                  <input type="text" id="sd-biorep" value="Rep 1" placeholder="e.g. Rep 1"/>
+                </div>
               </div>
-              <div id="sd-series-list" class="sd-series-list"></div>
+
+              <label class="check-row">
+                <input type="checkbox" id="sd-zero-last" checked/>
+                <span>Include Vehicle control (0 dose) in last well</span>
+              </label>
+
+              <div id="sd-preview-box" class="sd-preview-box"></div>
+
+              <button type="button" class="primary" id="btn-paint-serial" style="margin-top:2px;">Fill Dilution Series</button>
             </div>
-
-            <div class="field-row">
-              <div class="field">
-                <label for="sd-unit">Dose unit</label>
-                <input type="text" id="sd-unit" value="µM"/>
-              </div>
-              <div class="field">
-                <label for="sd-factor">Dilution step (1 : X)</label>
-                <input type="number" id="sd-factor" value="3" min="1.05" step="any"/>
-              </div>
-            </div>
-
-            <div class="field-row">
-              <div class="field">
-                <label for="sd-dir">Direction</label>
-                <select id="sd-dir">
-                  <option value="cols" selected>Across columns →</option>
-                  <option value="rows">Down rows ↓</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="sd-reps" id="lbl-sd-reps">Rows per series</label>
-                <select id="sd-reps">
-                  <option value="auto" selected>Auto-fit selection</option>
-                  <option value="1">1 (single)</option>
-                  <option value="2">2 (duplicate)</option>
-                  <option value="3">3 (triplicate)</option>
-                  <option value="4">4 (quadruplicate)</option>
-                </select>
-              </div>
-            </div>
-
-            <label class="check-row">
-              <input type="checkbox" id="sd-zero-last" checked/>
-              <span>Set last step as Vehicle control (0)</span>
-            </label>
-
-            <div id="sd-preview-box" class="sd-preview-box"></div>
-
-            <button type="button" class="primary" id="btn-paint-serial" style="margin-top:2px;">Fill Dilution Series</button>
           </div>
         </aside>
       </div>

@@ -49,7 +49,7 @@
     wells: {},
     customReagents: null, // null = auto from assay_type, else [{ name, per_well_ul }]
     compoundStocks: {},
-    serialSeries: [{ sample: "", treatment: "", top: 10 }],
+    serialSeries: [{ sample: "", treatment: "", top: 10, unit: "µM" }],
     selected: new Set(),
     undoStack: [],
     readBlocks: [],
