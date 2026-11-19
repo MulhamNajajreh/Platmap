@@ -1,0 +1,970 @@
+{
+  "schema": "plate-tidy/v1",
+  "plate_id": "Olaparib_BRCA1_96w",
+  "plate_format": 96,
+  "assay_type": "viability",
+  "well_volume_ul": 100.0,
+  "housekeeping_target": "",
+  "wells": [
+    {
+      "well": "A1",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "A2",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "A3",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "A4",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "A5",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "A6",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "A7",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "A8",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "A9",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "A10",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "A11",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "A12",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "B1",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "B2",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 10.0,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "B3",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 3.33333,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "B4",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 1.11111,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "B5",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 0.37037,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "B6",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 0.12346,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "B7",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 0.04115,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "B8",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 0.01372,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "B9",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 0.00457,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "B10",
+      "role": "neg_ctrl",
+      "sample": "BRCA1-WT",
+      "treatment": "0.1% DMSO",
+      "concentration": 0.0,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "B11",
+      "role": "pos_ctrl",
+      "sample": "BRCA1-WT",
+      "treatment": "Staurosporine",
+      "concentration": 1.0,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "B12",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "C1",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "C2",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 10.0,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "C3",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 3.33333,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "C4",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 1.11111,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "C5",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 0.37037,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "C6",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 0.12346,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "C7",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 0.04115,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "C8",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 0.01372,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "C9",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 0.00457,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "C10",
+      "role": "neg_ctrl",
+      "sample": "BRCA1-WT",
+      "treatment": "0.1% DMSO",
+      "concentration": 0.0,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "C11",
+      "role": "pos_ctrl",
+      "sample": "BRCA1-WT",
+      "treatment": "Staurosporine",
+      "concentration": 1.0,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "C12",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "D1",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "D2",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 10.0,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "D3",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 3.33333,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "D4",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 1.11111,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "D5",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 0.37037,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "D6",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 0.12346,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "D7",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 0.04115,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "D8",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 0.01372,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "D9",
+      "role": "sample",
+      "sample": "BRCA1-WT",
+      "treatment": "Olaparib",
+      "concentration": 0.00457,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "D10",
+      "role": "neg_ctrl",
+      "sample": "BRCA1-WT",
+      "treatment": "0.1% DMSO",
+      "concentration": 0.0,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "D11",
+      "role": "pos_ctrl",
+      "sample": "BRCA1-WT",
+      "treatment": "Staurosporine",
+      "concentration": 1.0,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "D12",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "E1",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "E2",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 10.0,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "E3",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 3.33333,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "E4",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 1.11111,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "E5",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 0.37037,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "E6",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 0.12346,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "E7",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 0.04115,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "E8",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 0.01372,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "E9",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 0.00457,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "E10",
+      "role": "neg_ctrl",
+      "sample": "BRCA1-KO",
+      "treatment": "0.1% DMSO",
+      "concentration": 0.0,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "E11",
+      "role": "blank",
+      "sample": "",
+      "treatment": "Media Blank",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "E12",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "F1",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "F2",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 10.0,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "F3",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 3.33333,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "F4",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 1.11111,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "F5",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 0.37037,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "F6",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 0.12346,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "F7",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 0.04115,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "F8",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 0.01372,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "F9",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 0.00457,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "F10",
+      "role": "neg_ctrl",
+      "sample": "BRCA1-KO",
+      "treatment": "0.1% DMSO",
+      "concentration": 0.0,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "F11",
+      "role": "blank",
+      "sample": "",
+      "treatment": "Media Blank",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "F12",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "G1",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "G2",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 10.0,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "G3",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 3.33333,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "G4",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 1.11111,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "G5",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 0.37037,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "G6",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 0.12346,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "G7",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 0.04115,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "G8",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 0.01372,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "G9",
+      "role": "sample",
+      "sample": "BRCA1-KO",
+      "treatment": "Olaparib",
+      "concentration": 0.00457,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "G10",
+      "role": "neg_ctrl",
+      "sample": "BRCA1-KO",
+      "treatment": "0.1% DMSO",
+      "concentration": 0.0,
+      "unit": "uM",
+      "bio_rep": "BioRep1",
+      "notes": ""
+    },
+    {
+      "well": "G11",
+      "role": "blank",
+      "sample": "",
+      "treatment": "Media Blank",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "G12",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "H1",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "H2",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "H3",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "H4",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "H5",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "H6",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "H7",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "H8",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "H9",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "H10",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "H11",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    },
+    {
+      "well": "H12",
+      "role": "moat",
+      "sample": "",
+      "treatment": "PBS",
+      "concentration": null,
+      "unit": "",
+      "bio_rep": "",
+      "notes": ""
+    }
+  ]
+}

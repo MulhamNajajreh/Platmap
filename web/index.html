@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>plate-tidy</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand-cluster">
+      <span class="wordmark">plate-tidy</span>
+      <div class="plate-meta-inline">
+        <input type="text" id="inp-plate-id" class="title-input" value="Untitled_Plate" aria-label="Plate ID" title="Click to rename plate"/>
+        <div class="inline-group">
+          <select id="sel-format" aria-label="Plate format">
+            <option value="6">6-well</option>
+            <option value="12">12-well</option>
+            <option value="24">24-well</option>
+            <option value="48">48-well</option>
+            <option value="96" selected>96-well</option>
+            <option value="384">384-well</option>
+          </select>
+        </div>
+        <div class="inline-group">
+          <select id="sel-assay" aria-label="Assay type">
+            <option value="viability" selected>Viability / IC₅₀</option>
+            <option value="qpcr">RT-qPCR (ΔΔCt)</option>
+            <option value="elisa">ELISA / OD</option>
+            <option value="generic">General readout</option>
+          </select>
+        </div>
+        <div class="inline-group">
+          <input type="number" id="inp-well-vol" value="100" min="1" step="5" style="width:68px" aria-label="Well volume"/>
+          <span>µL/well</span>
+        </div>
+        <div class="inline-group" id="hk-field-wrap" style="display:none">
+          <span>Ref gene:</span>
+          <input type="text" id="inp-hk" value="GAPDH" style="width:84px" placeholder="GAPDH"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <button type="button" class="subtle" id="btn-import-layout">Open Layout</button>
+      <input type="file" id="file-import-layout" accept=".json,.csv" style="display:none"/>
+      <button type="button" class="subtle" id="btn-export-layout">Save Layout</button>
+      <button type="button" id="btn-print-card">Print Protocol</button>
+    </div>
+  </header>
+
+  <nav class="view-nav">
+    <div class="view-tabs" role="tablist">
+      <button type="button" class="view-tab active" data-view="view-layout">Layout</button>
+      <button type="button" class="view-tab" data-view="view-protocol">Bench Protocol</button>
+      <button type="button" class="view-tab" data-view="view-analyze">Analyze &amp; Export</button>
+    </div>
+    <div class="nav-hint" id="autosave-indicator">Empty plate</div>
+  </nav>
+
+  <main class="workspace">
+    <!-- VIEW 1: PLATE LAYOUT -->
+    <section id="view-layout" class="view-pane active">
+      <div class="layout-subbar">
+        <span id="layout-empty-hint">Blank plate — drag across wells to start designing, or preview with sample data:</span>
+        <button type="button" class="subtle" id="btn-load-demo">Load Example</button>
+      </div>
+      <div class="layout-split">
+        <div class="surface-card">
+          <div class="section-head">
+            <h2>Microplate Map</h2>
+            <div class="action-strip">
+              <button type="button" id="btn-pbs-moat" title="Fill outer perimeter wells with sterile PBS buffer">Edge Moat (PBS)</button>
+              <button type="button" id="btn-clear-selected" title="Clear selected wells (Delete / Backspace)">Clear</button>
+              <button type="button" id="btn-undo" disabled title="Undo last plate edit (Cmd/Ctrl + Z)">Undo</button>
+              <button type="button" class="subtle" id="btn-clear-all">Reset</button>
+            </div>
+          </div>
+
+          <div class="sample-bar" id="sample-legend-bar"></div>
+
+          <div class="plate-scroll" id="plate-grid-container"></div>
+
+          <div class="well-readout-bar" id="well-readout-bar">
+            <span id="readout-primary">Drag across wells to select, or click row/column labels.</span>
+            <span id="readout-secondary"></span>
+          </div>
+
+          <div class="role-key">
+            <span><strong>Filled circle:</strong> Sample (darker = higher dose)</span>
+            <span><strong>0</strong> Vehicle / Neg ctrl</span>
+            <span><strong>+</strong> Pos ctrl</span>
+            <span><strong>–</strong> Blank</span>
+            <span><strong>Hatched:</strong> Buffer moat</span>
+          </div>
+
+          <div id="layout-audit-banner"></div>
+        </div>
+
+        <!-- Unified Inspector -->
+        <aside class="surface-card">
+          <div class="seg-switch" role="tablist">
+            <button type="button" class="seg-btn active" id="mode-btn-single">Assign Wells</button>
+            <button type="button" class="seg-btn" id="mode-btn-serial">Serial Dilution</button>
+          </div>
+
+          <div class="sel-pill" id="selection-summary">No wells selected</div>
+
+          <!-- Single / Control Assignment Mode -->
+          <div id="pane-mode-single" class="form-stack">
+            <div class="field">
+              <label for="assign-role">Well role</label>
+              <select id="assign-role">
+                <option value="sample" selected>Sample</option>
+                <option value="neg_ctrl">Vehicle / Negative control (100%)</option>
+                <option value="pos_ctrl">Positive control (max inhibition)</option>
+                <option value="blank">Blank / Cell-free / NTC</option>
+                <option value="standard">Standard</option>
+                <option value="moat">Perimeter moat (PBS / water)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="assign-sample">Sample / Cell line</label>
+              <input type="text" id="assign-sample" placeholder="e.g. BRCA1-WT"/>
+            </div>
+
+            <div class="field">
+              <label for="assign-treat" id="lbl-assign-treat">Compound / Treatment</label>
+              <input type="text" id="assign-treat" placeholder="e.g. Olaparib"/>
+            </div>
+
+            <div class="field-row" id="row-assign-dose">
+              <div class="field">
+                <label for="assign-conc">Concentration</label>
+                <input type="number" id="assign-conc" step="any" placeholder="Optional"/>
+              </div>
+              <div class="field">
+                <label for="assign-unit">Unit</label>
+                <input type="text" id="assign-unit" value="µM" placeholder="µM, nM, %"/>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="assign-biorep">Biological replicate</label>
+              <input type="text" id="assign-biorep" placeholder="e.g. Rep 1"/>
+            </div>
+
+            <button type="button" class="primary" id="btn-apply-wells" style="margin-top:4px;">Apply to Selection</button>
+          </div>
+
+          <!-- Serial Dilution Mode -->
+          <div id="pane-mode-serial" class="form-stack" style="display:none;">
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px;">
+                <label style="font-size:12px;font-weight:600;color:var(--ink-secondary);">Series (cell line · compound · top dose)</label>
+                <button type="button" class="subtle" id="btn-add-sd-series" style="padding:2px 8px;font-size:11.5px;">+ Add Series</button>
+              </div>
+              <div style="font-size:11.5px;color:var(--ink-muted);margin-bottom:7px;">
+                Add rows for distinct compounds/top doses, or separate names with commas (e.g. <code>WT, KO</code>).
+              </div>
+              <div id="sd-series-list" class="sd-series-list"></div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="sd-unit">Dose unit</label>
+                <input type="text" id="sd-unit" value="µM"/>
+              </div>
+              <div class="field">
+                <label for="sd-factor">Dilution step (1 : X)</label>
+                <input type="number" id="sd-factor" value="3" min="1.05" step="any"/>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="sd-dir">Direction</label>
+                <select id="sd-dir">
+                  <option value="cols" selected>Across columns →</option>
+                  <option value="rows">Down rows ↓</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="sd-reps" id="lbl-sd-reps">Rows per series</label>
+                <select id="sd-reps">
+                  <option value="auto" selected>Auto-fit selection</option>
+                  <option value="1">1 (single)</option>
+                  <option value="2">2 (duplicate)</option>
+                  <option value="3">3 (triplicate)</option>
+                  <option value="4">4 (quadruplicate)</option>
+                </select>
+              </div>
+            </div>
+
+            <label class="check-row">
+              <input type="checkbox" id="sd-zero-last" checked/>
+              <span>Set last step as Vehicle control (0)</span>
+            </label>
+
+            <div id="sd-preview-box" class="sd-preview-box"></div>
+
+            <button type="button" class="primary" id="btn-paint-serial" style="margin-top:2px;">Fill Dilution Series</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- VIEW 2: BENCH PROTOCOL -->
+    <section id="view-protocol" class="view-pane">
+      <div class="surface-card">
+        <div class="protocol-controls">
+          <div class="field">
+            <label for="calc-stock-conc">Master stock</label>
+            <div style="display:flex;gap:5px;">
+              <input type="number" id="calc-stock-conc" value="10" step="any" style="width:82px"/>
+              <select id="calc-stock-unit">
+                <option value="mM" selected>mM</option>
+                <option value="µM">µM</option>
+                <option value="nM">nM</option>
+                <option value="M">M</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="calc-spike">Addition mode</label>
+            <select id="calc-spike">
+              <option value="1" selected>1× full well volume</option>
+              <option value="2">2× working (add 1:1)</option>
+              <option value="10">10× spike-in (add 1:10)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="calc-overage">Overage (%)</label>
+            <input type="number" id="calc-overage" value="15" min="0" max="100" style="width:76px"/>
+          </div>
+
+          <div class="field">
+            <label for="calc-dead-ul">Tube dead vol (µL)</label>
+            <input type="number" id="calc-dead-ul" value="30" min="0" style="width:90px"/>
+          </div>
+
+          <div class="field">
+            <label for="calc-vehicle">Solvent</label>
+            <input type="text" id="calc-vehicle" value="DMSO" style="width:78px"/>
+          </div>
+
+          <div style="margin-left:auto;display:flex;gap:8px;">
+            <button type="button" id="btn-toggle-reagents">Customize Master-Mix Reagents</button>
+          </div>
+        </div>
+
+        <div id="reagent-editor-wrap" class="reagent-editor" style="display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <strong style="font-size:12.5px;">Per-well master-mix components (µL / well)</strong>
+            <div style="display:flex;gap:6px;">
+              <button type="button" id="btn-add-reagent">+ Add Component</button>
+              <button type="button" class="subtle" id="btn-reset-reagents">Reset Default</button>
+            </div>
+          </div>
+          <div id="reagent-rows-container"></div>
+        </div>
+
+        <div class="protocol-grid">
+          <div>
+            <h2 style="font-size:14.5px;margin:0 0 8px 0;">1. Cell Suspension / Master-Mix Volumes</h2>
+            <div id="master-mix-output"></div>
+          </div>
+
+          <div>
+            <h2 style="font-size:14.5px;margin:6px 0 4px 0;">2. Serial Dilution Tubes</h2>
+            <p style="margin:0 0 10px 0;font-size:12.5px;color:var(--ink-secondary);">
+              Computed backwards from the lowest concentration so every tube covers its plated wells plus the exact transfer into the next tube. Click a row to check it off at the bench.
+            </p>
+            <div id="serial-dilution-output"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: ANALYZE & EXPORT -->
+    <section id="view-analyze" class="view-pane">
+      <div class="surface-card">
+        <div class="import-bar">
+          <div class="drop-strip" id="reader-dropzone">
+            <div>
+              <strong style="font-size:13.5px;">Import plate reader or qPCR file (.xlsx, .csv, .tsv, .txt)</strong>
+              <div style="font-size:12px;color:var(--ink-secondary);">Drop file here or click to browse — supports BioTek Gen5, Tecan, SoftMax Pro, BMG, and QuantStudio</div>
+            </div>
+            <span style="font-size:12px;font-weight:600;color:var(--accent);">Choose File</span>
+            <input type="file" id="file-reader-input" accept=".xlsx,.csv,.tsv,.txt" style="display:none"/>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <button type="button" id="btn-toggle-paste">Paste Grid</button>
+            <div id="read-block-wrap" style="display:none;align-items:center;gap:6px;">
+              <label for="sel-read-block" style="font-size:12px;color:var(--ink-secondary);">Read:</label>
+              <select id="sel-read-block"></select>
+            </div>
+          </div>
+        </div>
+
+        <div id="paste-drawer" style="display:none;margin-top:10px;">
+          <textarea id="paste-raw-area" rows="4" style="width:100%;font-family:var(--mono);font-size:12px;" placeholder="Paste cells from Excel (either an A–H × 1–12 plate block or Well, Value columns)..."></textarea>
+          <div style="margin-top:6px;display:flex;gap:8px;">
+            <button type="button" class="primary" id="btn-parse-pasted">Parse Pasted Data</button>
+          </div>
+        </div>
+
+        <div id="parser-status-msg" class="status-msg" style="display:none;"></div>
+      </div>
+
+      <div id="analysis-empty-state" class="surface-card" style="margin-top:16px;color:var(--ink-secondary);text-align:center;padding:36px 20px;">
+        Drop a raw reader file above — or click <strong>Load Example</strong> under the Layout tab — to inspect spatial QC, fitted curves, and tidy exports.
+      </div>
+
+      <div id="analysis-results" style="display:none;">
+        <div class="analysis-grid">
+          <!-- Left: Curve & Fit Table -->
+          <div class="surface-card">
+            <div class="section-head">
+              <h2 id="plot-card-title">Dose–Response Fit</h2>
+              <button type="button" id="btn-dl-svg">Export SVG</button>
+            </div>
+            <div id="plot-svg-container"></div>
+            <div id="curve-fit-table-wrap" style="margin-top:12px;"></div>
+          </div>
+
+          <!-- Right: QC + Spatial Signal Map -->
+          <div class="surface-card">
+            <div class="section-head">
+              <h2>Assay QC &amp; Plate Signal</h2>
+              <select id="sel-heatmap-metric" style="font-size:12px;padding:3px 7px;">
+                <option value="raw" selected>Color: Raw signal</option>
+                <option value="norm">Color: Normalized (% / Fold)</option>
+              </select>
+            </div>
+            <div class="qc-strip" id="qc-kpi-grid"></div>
+            <div id="qc-notes-box"></div>
+            <div id="heatmap-container"></div>
+          </div>
+        </div>
+
+        <!-- Bottom: Tidy Table + Exports -->
+        <div class="surface-card" style="margin-top:18px;">
+          <div class="section-head">
+            <h2>Tidy Dataset (<span id="tidy-row-count">0</span> wells)</h2>
+            <div class="action-strip">
+              <button type="button" class="primary" id="btn-dl-tidy">Download Tidy CSV (R / Python)</button>
+              <button type="button" id="btn-dl-prism">Download Prism TSV</button>
+            </div>
+          </div>
+          <div style="max-height:340px;overflow:auto;">
+            <table class="clean-table" id="tidy-preview-table"></table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="print-sheet" class="print-only"></section>
+  </main>
+
+  <script defer src="js/core.js"></script>
+  <script defer src="js/parser.js"></script>
+  <script defer src="js/math.js"></script>
+  <script defer src="js/plots.js"></script>
+  <script defer src="js/ui.js"></script>
+</body>
+</html>
