@@ -53,6 +53,14 @@ uv run plate-tidy recipe examples/dose_response_96.plate.json \
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
 
+## Author & Citation
+
+Created and maintained by **Mulham Najajreh** ([@MulhamNajajreh](https://github.com/MulhamNajajreh)).
+
+If `plate-tidy` is useful in your research, please cite:
+
+> Najajreh, M. (2026). *plate-tidy: Microplate layout designer, master-mix calculator, and plate-reader parser* (v0.1.0). https://github.com/MulhamNajajreh/plate-tidy
+
 ## License
 
-[MIT](LICENSE)
+[MIT License](LICENSE) — Copyright © 2026 Mulham Najajreh.

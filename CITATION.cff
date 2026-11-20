@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use plate-tidy in your research, please cite it using the metadata below."
+title: "plate-tidy: Microplate layout designer, master-mix calculator, and plate-reader parser"
+type: software
+version: 0.1.0
+date-released: "2026-11-19"
+license: MIT
+url: "https://plate-tidy.vercel.app"
+repository-code: "https://github.com/MulhamNajajreh/plate-tidy"
+authors:
+  - family-names: Najajreh
+    given-names: Mulham

@@ -6,7 +6,7 @@ readme = "README.md"
 license = "MIT"
 requires-python = ">=3.9"
 authors = [
-    { name = "plate-tidy contributors" }
+    { name = "Mulham Najajreh" }
 ]
 keywords = [
     "microplate",
@@ -25,6 +25,10 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Bio-Informatics",
 ]
 dependencies = []
+
+[project.urls]
+Homepage = "https://plate-tidy.vercel.app"
+Repository = "https://github.com/MulhamNajajreh/plate-tidy"
 
 [project.scripts]
 plate-tidy = "plate_tidy.cli:main"
