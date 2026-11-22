@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-message: "If you use plate-tidy in your research, please cite it using the metadata below."
-title: "plate-tidy: Microplate layout designer, master-mix calculator, and plate-reader parser"
+message: "If you use PlateMap in your research, please cite it using the metadata below."
+title: "PlateMap: Microplate layout designer, master-mix calculator, and plate-reader parser"
 type: software
 version: 0.1.0
 date-released: "2026-11-19"

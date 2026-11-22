@@ -3,13 +3,25 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>plate-tidy</title>
+  <title>PlateMap — Microplate Layout, Dilution &amp; Reader Tool</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M5.5 2.5H19.5C20.6 2.5 21.5 3.4 21.5 4.5V19.5C21.5 20.6 20.6 21.5 19.5 21.5H4.5C3.4 21.5 2.5 20.6 2.5 19.5V5.5L5.5 2.5Z' fill='%23fbfaf7' stroke='%231f5647' stroke-width='1.8' stroke-linejoin='round'/%3E%3Ccircle cx='7.5' cy='8.5' r='1.8' fill='%231f5647'/%3E%3Ccircle cx='12' cy='8.5' r='1.8' fill='%231f5647' fill-opacity='0.62'/%3E%3Ccircle cx='16.5' cy='8.5' r='1.8' fill='%231f5647' fill-opacity='0.28'/%3E%3Ccircle cx='7.5' cy='14.8' r='1.7' stroke='%231f5647' stroke-width='1.4'/%3E%3Ccircle cx='12' cy='14.8' r='1.7' stroke='%231f5647' stroke-width='1.4'/%3E%3Ccircle cx='16.5' cy='14.8' r='1.7' stroke='%231f5647' stroke-width='1.4'/%3E%3C/svg%3E"/>
   <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
   <header class="app-header">
     <div class="brand-cluster">
-      <span class="wordmark">plate-tidy</span>
+      <div class="brand-logo" aria-label="PlateMap">
+        <svg class="brand-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5.5 2.5H19.5C20.6 2.5 21.5 3.4 21.5 4.5V19.5C21.5 20.6 20.6 21.5 19.5 21.5H4.5C3.4 21.5 2.5 20.6 2.5 19.5V5.5L5.5 2.5Z" fill="#fbfaf7" stroke="#1f5647" stroke-width="1.75" stroke-linejoin="round"/>
+          <circle cx="7.5" cy="8.5" r="1.75" fill="#1f5647"/>
+          <circle cx="12" cy="8.5" r="1.75" fill="#1f5647" fill-opacity="0.62"/>
+          <circle cx="16.5" cy="8.5" r="1.75" fill="#1f5647" fill-opacity="0.28"/>
+          <circle cx="7.5" cy="14.8" r="1.65" stroke="#1f5647" stroke-width="1.35"/>
+          <circle cx="12" cy="14.8" r="1.65" stroke="#1f5647" stroke-width="1.35"/>
+          <circle cx="16.5" cy="14.8" r="1.65" stroke="#1f5647" stroke-width="1.35"/>
+        </svg>
+        <span class="wordmark">Plate<span class="wordmark-accent">Map</span></span>
+      </div>
       <div class="plate-meta-inline">
         <input type="text" id="inp-plate-id" class="title-input" value="Untitled_Plate" aria-label="Plate ID" title="Click to rename plate"/>
         <div class="inline-group">
@@ -370,7 +382,7 @@
   </main>
 
   <footer class="no-print" style="max-width:1340px;margin:0 auto;padding:0 24px 28px 24px;font-size:12px;color:var(--ink-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
-    <span>Created by <a href="https://github.com/MulhamNajajreh" target="_blank" rel="noopener" style="color:var(--ink-secondary);text-decoration:none;font-weight:550;">Mulham Najajreh</a></span>
+    <span><strong>PlateMap</strong> · Created by <a href="https://github.com/MulhamNajajreh" target="_blank" rel="noopener" style="color:var(--ink-secondary);text-decoration:none;font-weight:550;">Mulham Najajreh</a></span>
     <span><a href="https://github.com/MulhamNajajreh/plate-tidy" target="_blank" rel="noopener" style="color:var(--ink-secondary);text-decoration:none;">GitHub</a> · MIT License</span>
   </footer>
 

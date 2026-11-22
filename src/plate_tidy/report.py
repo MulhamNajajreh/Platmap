@@ -248,7 +248,7 @@ def generate_html_report(
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>{html.escape(layout.plate_id)} — plate-tidy</title>
+  <title>{html.escape(layout.plate_id)} — PlateMap</title>
   <style>
     body {{ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #f4f2ec; color: #1c1b18; margin: 0; padding: 28px 20px; font-variant-numeric: tabular-nums; }}
     .wrap {{ max-width: 940px; margin: 0 auto; }}
